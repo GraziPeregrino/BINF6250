@@ -109,13 +109,16 @@ FOR each (name, seq) returned by get_fasta(nrf1_file):
 # Generative AI Appendix
 
 The appendix entry must contain:
-Description of which generative AI was used and its version.
+Description of which generative AI was used and its version. Claude 5.5
 
 The entire prompt that was used to generate the content.
-
+- Act as a Bioinformatics graduate tutor and explained me the steps by step pseudocode of Gibbs Sampling to find Motifs.
+- Explain the mathematical steps of the Gibbs sampling 
+  
 An explanation of how it was used .
-
+- We used the language model to guide us on the understanding of the pseudocode and the Gibbs Algorithm.
 
 A justification for why generative AI was used.
+- To use another explanation source, together with universities lessons available on youtube.
 
 
