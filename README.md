@@ -47,12 +47,10 @@ The program ran successfully and all required functionality described in the ass
             #final_pfm = build_pfm(Motifs)
         #Return final_PFM
 
-#Pseudocode for NRF1 Driver Program 
-#nrf1_file needs the placeholder path replaced with real one
-#"TODO" 
-    #Data ingest of nrf1_peaks
-        #FOR each (name, seq) entry returned by get_fasta(nrf1_file):
-        add seq directly to nrf1_peaks (no filtering needed)
+#NRF1 driver program psuedocode
+#Data ingest of nrf1_peaks
+    #FOR each (name, seq) entry returned by get_fasta(nrf1_file):
+        #add seq directly to nrf1_peaks (no filtering needed)
 
 # Results Output
 ** PASTE IN OUTPUT FROM YULIA'S PROGRAM RUN HERE**
@@ -72,7 +70,7 @@ Our main success was producing a correct, fully working implementation that beha
 Yulia's contribution to the NRF1 driver program was a big win. She added periodic sanity-check print statements every 500 rounds, which let us watch a run that took over two hours, tracking the IC score's progress along the way rather than waiting blind for a single final result and questioning if the result was a due to a bug. Given how long the NRF1 run took, this made a real, practical difference in being able to observe and reason about what was happening in real time instead of guessing afterward.
   
 # Struggles
-A significant early struggle was etting a working environment set up. Sorting out which packages (bamnostic, seqlogo) were required versus optional, and discovering that seqlogo's visual plotting depends on an external system tool (Ghostscript) not included with the Python package itself. Per the assignment's own note that this library is optional, we worked around this by verifying results directly through additional print statements in the ```PFM``` and ```pfm_ic()`` rather than the visual plot.
+A significant early struggle was etting a working environment set up. Sorting out which packages (bamnostic, seqlogo) were required versus optional, and discovering that seqlogo's visual plotting depends on an external system tool (Ghostscript) not included with the Python package itself. Per the assignment's own note that this library is optional, we worked around this by verifying results directly through additional print statements in the ```PFM``` and ```pfm_ic()``` rather than the visual plot.
 
 We also hit a FileNotFoundError after unzipping the provided data. The files had been automatically decompressed during download, so our code's paths (expecting .gz extensions) no longer matched what was on the disk. This turned out to be a simple path mismatch rather than file corruption, which we confirmed by inspecting the decompressed file's contents directly before assuming anything was broken and adjusted filenames.
   
