@@ -48,9 +48,9 @@ The program ran successfully and all required functionality described in the ass
         #Return final_PFM
 
 #NRF1 driver program psuedocode
-#Data ingest of nrf1_peaks
-    #FOR each (name, seq) entry returned by get_fasta(nrf1_file):
-        #add seq directly to nrf1_peaks (no filtering needed)
+    #Data ingest of nrf1_peaks
+        #FOR each (name, seq) entry returned by get_fasta(nrf1_file):
+            #add seq directly to nrf1_peaks (no filtering needed)
 
 # Results Output
 ** PASTE IN OUTPUT FROM YULIA'S PROGRAM RUN HERE**
