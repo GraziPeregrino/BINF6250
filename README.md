@@ -192,17 +192,32 @@ FUNCTION BUILD_DISTANCE_MATRIX(sequences):
     RETURN distance_matrix, ids
 
 
-FUNCTION NEIGHBOR_JOINING(D, sequences):
+
+FUNCTION NEIGHBOR_JOINING(distance_matrix, labels):
 
     # INITIALIZATION
-    active_nodes = LIST(sequences)
+    active_nodes = COPY(labels)
     n = LENGTH(active_nodes)
 
-    # Initialize tree with one leaf per sequence
-    T = EMPTY_TREE()
+    IF n < 2:
+        RAISE ERROR "At least two sequences are required"
+
+    # Convert numerical matrix to node-based distances
+    D = EMPTY_DICTIONARY()
+
+    FOR i FROM 0 TO n - 1:
+        D[labels[i]] = EMPTY_DICTIONARY()
+
+        FOR j FROM 0 TO n - 1:
+            D[labels[i]][labels[j]] = distance_matrix[i][j]
+
+    # Store Newick string for each node
+    newick = EMPTY_DICTIONARY()
 
     FOR EACH node IN active_nodes:
-        ADD_NODE(T, node)
+        newick[node] = node
+
+    node_counter = 0
 
     # ITERATION: Continue until two nodes remain
     WHILE n > 2:
@@ -216,7 +231,7 @@ FUNCTION NEIGHBOR_JOINING(D, sequences):
             FOR EACH j IN active_nodes:
                 row_sums[i] = row_sums[i] + D[i][j]
 
-        # STEP 2: Calculate Q-matrix and find minimum pair
+        # STEP 2: Calculate Q-values and find minimum pair
         min_q = INFINITY
         min_pair = NONE
 
@@ -229,7 +244,7 @@ FUNCTION NEIGHBOR_JOINING(D, sequences):
                 min_q = q
                 min_pair = (i, j)
 
-        # STEP 3: Select pair with minimum Q-value
+        # STEP 3: Select pair
         (i, j) = min_pair
 
         # STEP 4: Calculate branch lengths
@@ -240,29 +255,38 @@ FUNCTION NEIGHBOR_JOINING(D, sequences):
 
         branch_j = D[i][j] - branch_i
 
-        # STEP 5: Create new internal node
-        k = GENERATE_UNIQUE_NODE()
+        # STEP 5: Create a new internal node
+        k = GENERATE_UNIQUE_NODE_ID(node_counter)
+        node_counter = node_counter + 1
 
-        ADD_NODE(T, k)
-        ADD_EDGE(T, k, i, branch_i)
-        ADD_EDGE(T, k, j, branch_j)
+        # Combine the two subtrees into a Newick string
+        newick[k] = "(" +
+            newick[i] + ":" + FORMAT(branch_i) + "," +
+            newick[j] + ":" + FORMAT(branch_j) + ")"
 
         # STEP 6: Calculate distances to remaining nodes
         remaining_nodes = active_nodes EXCLUDING i AND j
+
+        D[k] = EMPTY_DICTIONARY()
 
         FOR EACH x IN remaining_nodes:
 
             distance_kx = 0.5 * (
                 D[i][x] + D[j][x] - D[i][j]
             )
-
             D[k][x] = distance_kx
             D[x][k] = distance_kx
 
         D[k][k] = 0
 
         # STEP 7: Remove joined nodes from active matrix
-        REMOVE rows and columns i, j FROM D
+        REMOVE D[i] AND D[j]
+
+        FOR EACH x IN remaining_nodes:
+            REMOVE D[x][i] AND D[x][j]
+
+        # Remove old Newick entries
+        REMOVE newick[i] AND newick[j]
 
         # STEP 8: Update active nodes
         active_nodes = remaining_nodes
@@ -270,13 +294,19 @@ FUNCTION NEIGHBOR_JOINING(D, sequences):
 
         n = LENGTH(active_nodes)
 
-    # TERMINATION: Connect remaining two nodes
+    # TERMINATION: Two nodes remain
     (i, j) = active_nodes
 
-    ADD_EDGE(T, i, j, D[i][j])
+    final_distance = D[i][j]
 
-    RETURN T
+    # Split final edge to represent the unrooted tree
+    final_branch = final_distance / 2
 
+    final_tree = "(" +
+        newick[i] + ":" + FORMAT(final_branch) + "," +
+        newick[j] + ":" + FORMAT(final_branch) + ");"
+
+    RETURN final_tree
 
 ```
 
