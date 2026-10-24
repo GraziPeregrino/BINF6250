@@ -3,6 +3,55 @@ Description of the project
 
 # Pseudocode
 ```
+
+FUNCTION READ_FASTA(filename):
+
+    # INITIALIZATION
+    sequences = EMPTY_DICTIONARY()
+    current_id = NONE
+    current_sequence = []
+
+    # OPEN FASTA FILE
+    OPEN filename FOR READING AS file
+
+    # READ FILE LINE BY LINE
+    FOR EACH line IN file:
+
+        # Remove whitespace and newline characters
+        line = STRIP(line)
+
+        # Skip empty lines
+        IF line == "":
+            CONTINUE
+
+        # CHECK FOR A NEW SEQUENCE HEADER
+        IF line STARTS WITH ">":
+
+            # Save the previous sequence if one exists
+            IF current_id IS NOT NONE:
+                sequences[current_id] = JOIN(current_sequence)
+
+            # Extract sequence identifier
+            current_id = FIRST_WORD(line WITHOUT FIRST CHARACTER)
+
+            # Reset sequence list for new entry
+            current_sequence = []
+
+        ELSE:
+
+            # Append sequence data
+            APPEND line TO current_sequence
+
+    # SAVE THE LAST SEQUENCE
+    IF current_id IS NOT NONE:
+        sequences[current_id] = JOIN(current_sequence)
+
+    # CLOSE FILE
+    CLOSE file
+
+    RETURN sequences
+
+
 FUNCTION SMITH_WATERMAN(sequence1, sequence2,
                         match_score = 2.0,
                         mismatch_penalty = -1.0,
