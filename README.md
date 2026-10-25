@@ -1,9 +1,13 @@
 # Introduction
-Description of the project
+This project implements distance-based phylogenetic tree construction using the neighbor-joining (NJ) algorithm, with pairwise distances derived from Smith–Waterman local alignment scores. It extends our Project 05 alignment code into a full pipeline that takes a set of sequences and produces an unrooted tree in Newick format, along with a visualization.
+
+The pipeline has three stages:
+1. Distance calculation. Compute all pairwise Smith–Waterman alignment scores, convert similarity scores to distances, and assemble the complete distance matrix. A normalized similarity matrix can optionally be built as well.
+2. Tree construction. Build the neighbor-joining matrix of rate-adjusted distances, then iteratively join the pair selected by the NJ criterion. After each join, update the distances with the NJ formula and compute branch lengths for the newly joined nodes.
+3. Tree visualization. Convert the resulting tree structure to Newick format and generate an unrooted tree visualization.
 
 # Pseudocode
 ```
-
 FUNCTION READ_FASTA(filename):
 
     # INITIALIZATION
@@ -222,7 +226,7 @@ FUNCTION BUILD_DISTANCE_MATRIX(sequences):
         # Get first sequence
         seq1 = sequences[ids[i]]
 
-        FOR j FROM i + 1 TO n - 1:
+        FOR j FROM i + 1 TO n:
 
             # Get second sequence
             seq2 = sequences[ids[j]]
@@ -359,11 +363,97 @@ FUNCTION NEIGHBOR_JOINING(distance_matrix, labels):
 
 ```
 
+# Testing our code
+We conducted a series of tests on our code throughout the process, to make sure things were working as we expected. 
+To test `read_fasta()`, we conducted the following:
+```
+# Test read_fasta()
+sequences = read_fasta("data/lafayette_SARS_RT.fasta")
+
+print("Number of sequences:", len(sequences))
+
+# Display the first 3 sequences
+for seq_id, sequence in list(sequences.items())[:3]:
+    print(f"\nSequence ID: {seq_id}")
+    print(f"Length: {len(sequence)}")
+    print(f"First 50 characters: {sequence[:50]}")
+```
+Result:
+```
+Number of sequences: 20
+
+Sequence ID: gi|24209940|gb|AAN41462.1|
+Length: 229
+First 50 characters: PISPIETVPVKLKPGMDGPKVKQWPLTEEKIKALVEICTEMEKEGKISKI
+
+Sequence ID: gi|24209942|gb|AAN41463.1|
+Length: 229
+First 50 characters: PISPIETVPVKLKPGMDGPKVKQWPLTEEKIKALVEICTEMEKEGKISKI
+
+Sequence ID: gi|24209944|gb|AAN41464.1|
+Length: 229
+First 50 characters: PISPIETVPVKLKPGMDGPKVKQWPLTEEKIKALVEICTEMEKEGKISKI
+```
+
+To test our `smith_waterman()` implementation, we conducted the following:
+```
+# Test 1: Identical sequences
+print(smith_waterman("ACGT", "ACGT"))
+# Expected: 1.0
+
+# Test 2: Partial similarity
+print(smith_waterman("ACGT", "ACGA"))
+# Expected: 0.75
+
+# Test 3: No matching characters
+print(smith_waterman("AAAA", "TTTT"))
+# Expected: 0.0
+
+# Test 4: Empty sequence
+print(smith_waterman("", "ACGT"))
+# Expected: 0.0
+
+# Test 5: Different lengths
+print(smith_waterman("ACGT", "TTACGTAA"))
+# Expected: approximately 0.71
+```
+Result:
+```
+1.0
+0.75
+0.0
+0.0
+0.71
+```
+
+To test `build_distance_matrix()`, we conducted the follwoing:
+```
+sequences = read_fasta("data/lafayette_SARS_RT.fasta")
+
+distance_matrix, ids = build_distance_matrix(sequences)
+
+print("Matrix shape:", distance_matrix.shape)
+print("Sequence count:", len(ids))
+
+print("\nFirst three rows and columns:")
+print(np.round(distance_matrix[:3, :3], 4))
+```
+Result:
+```
+Matrix shape: (20, 20)
+Sequence count: 20
+
+First three rows and columns:
+[[0.   0.01 0.05]
+ [0.01 0.   0.04]
+ [0.05 0.04 0.  ]]
+```
+
 # Successes
 Description of the team's learning points
 
 # Struggles
-Description of the stumbling blocks the team experienced
+**Concept:** We initially struggled with the main idea behind this program, and how we needed to go about implmenting it. We spent a couple of ours of a Teams call trying to figure out if/how we needed to change our `smith_waterman()` implementation to get the results we needed. Eventually, we decided on slightly changing the implementations from GRaziano's group from last project, to include the overall similarity score of the two sequences.
 
 # Personal Reflections
 ## Group Leader
