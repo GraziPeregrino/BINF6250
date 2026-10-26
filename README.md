@@ -450,16 +450,20 @@ First three rows and columns:
 ```
 
 # Successes
-Description of the team's learning points
+This project was great so we could take what we implemented on previous projects and the knowledge we got from Smith-Waterman algorithm and apply it to a more complex problems and also understanding how everything is connected. It helped us to develop not only our programming skills but also our problem solving ability, improving our communication how we work as team.
 
 # Struggles
 **Concept:** We initially struggled with the main idea behind this program, and how we needed to go about implmenting it. We spent a couple of ours of a Teams call trying to figure out if/how we needed to change our `smith_waterman()` implementation to get the results we needed. Eventually, we decided on slightly changing the implementations from Graziano's group from last project, to include the overall similarity score of the two sequences.
 
 # Personal Reflections
 ## Group Leader - Graziano 
-Group leader's reflection on the project
+**Issues** One of the biggest challenges I faced during this project was understanding how the Neighbor-Joining algorithm works and how to use the formulas and implement it into the Python code. We worked with the Smith-Waterman algorithm and how to integrate sequence alignment scores into a distance matrix and using it to construct a phylogenetic tree. Revisiting our pseudocode was needed and examining each step of the algorithm,, and identify where our implementation was showing incorrect results.
 
-## Member - Margareth  
+**What I Learn** While we were working on the project I developed as better understanding of how dynamic programming, distance calculation, and phylogenetic tree construction can work together. The process to break the problem into small steps and test those parts were a great stepping stone to continue the process and achieve the algorithm goal.
+
+**Next steps** As next steps, I want to continue to improve my ability to analyze mathematical concepts and translate into algorithm. The project help me to learn how to lean into my team and overcome technical difficulties by working together. Another goal will be implementing and explore object-oriented programming on the project, so we can keep the code more organized, reusable and easier for maintainance. 
+
+## Member - Margaret  
 Other members' reflections on the project
 
 # Generative AI Appendix
