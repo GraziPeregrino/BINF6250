@@ -453,14 +453,29 @@ First three rows and columns:
 Description of the team's learning points
 
 # Struggles
-**Concept:** We initially struggled with the main idea behind this program, and how we needed to go about implmenting it. We spent a couple of ours of a Teams call trying to figure out if/how we needed to change our `smith_waterman()` implementation to get the results we needed. Eventually, we decided on slightly changing the implementations from GRaziano's group from last project, to include the overall similarity score of the two sequences.
+**Concept:** We initially struggled with the main idea behind this program, and how we needed to go about implmenting it. We spent a couple of ours of a Teams call trying to figure out if/how we needed to change our `smith_waterman()` implementation to get the results we needed. Eventually, we decided on slightly changing the implementations from Graziano's group from last project, to include the overall similarity score of the two sequences.
 
 # Personal Reflections
-## Group Leader
+## Group Leader - Graziano 
 Group leader's reflection on the project
 
-## Other member
+## Member - Margareth  
 Other members' reflections on the project
 
 # Generative AI Appendix
-As per the syllabus
+1. Description of which generative AI was used and its version.
+
+NotebookLM 2.0 and Claude Opus 5 
+
+2. The entire prompt that was used to generate the content.
+
+Can you help me to fix my pseudocode to a the github format?
+I need explanation in a different way of how the distance metrics for comparing sequences using Smith-Waterman avoiding the use of UPGMA
+Can you help to understand the Neighbor - Joining algorithm and the use of the algorithm in bioinformatics
+
+3. An explanation of how it was used (e.g., to generate ideas).
+I used it as a tool to learn the concepts described on the articles and materials, asking for further clarification on the material and extra examples.
+
+4. A justification for why generative AI was used.
+
+Sometimes just reading a concept and formula is not enough for me to have a grasp on the material, so I used it as an additional source to lean about the Smith-Waterman algorithm, the use of traceback and scoring and the application of the Neighbor- Joining Algorithm
