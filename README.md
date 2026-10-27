@@ -450,10 +450,17 @@ First three rows and columns:
 ```
 
 # Successes
-This project was great so we could take what we implemented on previous projects and the knowledge we got from Smith-Waterman algorithm and apply it to a more complex problems and also understanding how everything is connected. It helped us to develop not only our programming skills but also our problem solving ability, improving our communication how we work as team.
+**Building upon knowledge** This project was great for implementing previous projects and the knowledge we got from Smith-Waterman algorithm and apply it to a more complex problems and also understanding how everything is connected. It helped us to develop not only our programming skills but also our problem solving ability, improving our communication how we work as team.
+
+**Communication** We were able to have a mixture of synchronous and asynchronous work that allowed us to effectively collaborate and build upon each other's knowledge and skillset. We were able to bounce ideas off of each other, and work together through confusions in the beginning stages of the project.
+
+**Implementation** We were able to successfully produce seemingly correct output, as compared with examples and their expected output.
+
 
 # Struggles
 **Concept:** We initially struggled with the main idea behind this program, and how we needed to go about implmenting it. We spent a couple of ours of a Teams call trying to figure out if/how we needed to change our `smith_waterman()` implementation to get the results we needed. Eventually, we decided on slightly changing the implementations from Graziano's group from last project, to include the overall similarity score of the two sequences.
+
+**Using `textdistance` repo in GitHub** We ultimately did not have time to combe through this repo to use its functions and potential implementations in this code. If we had more time, this is something that could be interesting to include in our code to further optimize.
 
 # Personal Reflections
 ## Group Leader - Graziano 
@@ -463,8 +470,12 @@ This project was great so we could take what we implemented on previous projects
 
 **Next steps** As next steps, I want to continue to improve my ability to analyze mathematical concepts and translate into algorithm. The project help me to learn how to lean into my team and overcome technical difficulties by working together. Another goal will be implementing and explore object-oriented programming on the project, so we can keep the code more organized, reusable and easier for maintainance. 
 
-## Member - Margaret  
-Other members' reflections on the project
+## Member - Maggie
+**Issues** One of the main challenegs I had to work through was understanding the workflow. Initially in class, I was somewhat confused on the removing of smaller trees from the matrix. I also did not really understand how to establish the different branch lengths within that smaler tree. Another problem wer ran into early and had to work through was reworking our SMither-Waterman application so that we could return the overall score of the sequence.
+
+**What I learned** I spent some time with the workflow posted on Canvas, which really helped me understand the concept and calculatins needed for branch length. By working through this, I was able to understand all the working pieces into the workflow. Taking small steps and focussing on one piece at a time really helped us to implement this project, and understand the importance of dynamic programming and node/tree construction.
+
+**Next Steps** For this project specifically, a next step I would want to take would be to explore more edge cases and possible limitations of our code. I also would like to take more time to understand importing functions and classes. For example, the `textdistance` Github repo that was mentioned in class; I would like to spend time importing some of those classes and playing around with already established ways of measuring distance to optimize our code. 
 
 # Generative AI Appendix
 1. Description of which generative AI was used and its version.
